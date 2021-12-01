@@ -3,54 +3,77 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    async function getDate() {
-      const res = await fetch('/api/date');
-      const newDate = await res.text();
-      setDate(newDate);
-    }
-    getDate();
-  }, []);
   return (
+    <>
     <main>
-      <h1>Create React App + Go API</h1>
-      <h2>
-        Deployed with{' '}
-        <a
-          href="https://vercel.com/docs"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Vercel
-        </a>
-        !
-      </h2>
-      <p>
-        <a
-          href="https://github.com/vercel/vercel/tree/main/examples/create-react-app"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          This project
-        </a>{' '}
-        was bootstrapped with{' '}
-        <a href="https://facebook.github.io/create-react-app/">
-          Create React App
-        </a>{' '}
-        and contains three directories, <code>/public</code> for static assets,{' '}
-        <code>/src</code> for components and content, and <code>/api</code>{' '}
-        which contains a serverless <a href="https://golang.org/">Go</a>{' '}
-        function. See{' '}
-        <a href="/api/date">
-          <code>api/date</code> for the Date API with Go
-        </a>
-        .
-      </p>
-      <br />
-      <h2>The date according to Go is:</h2>
-      <p>{date ? date : 'Loading date...'}</p>
+      <div className="container">
+        <div className="container-details">
+          <div className="title">Campaign details</div>
+          <div className="details">
+            <div className="result"><span>5</span><div>Days remaining</div></div>
+            <div className="result"><span>300</span><div>Clicks</div></div>
+            <div className="result"><span>240</span><div>Spent</div></div>
+            <div className="result"><span>5M</span><div>People reached</div></div>
+          </div>
+        </div>
+
+        <div className="container-form">
+          <div className="title">Active campaign - Boost my content</div>
+          <div className="form">
+            <div className="form-content">
+              <div className="row">
+                <div className="container-input">
+                  <div>Campaign name</div>
+                  <input className="input" placeholder="Boost my content" />
+                </div>
+                <div className="container-input">
+                  <div>Content link</div>
+                  <input placeholder="www.example.domain.com" />
+                </div>
+              </div>
+              <div className="row">
+                <div className="container-input">
+                  <div>Add Categories</div>
+                  <input placeholder="Lifestyle" />
+                </div>
+                <div className="container-input">
+                  <div>Target location</div>
+                  <input placeholder="ITALY" />
+                </div>
+              </div>
+            </div>
+            <div className="form-content">
+              <div className="container-input">
+                <div>Start date of the campaign</div>
+                <input type="date" />
+              </div>
+              <div className="container-input">
+                <div>End date of the campaig</div>
+                <input type="date" />
+              </div>
+              <div className="container-input">
+                <div>Daily spending limit</div>
+                <div className="custom-input">
+                <label>EUR</label><input placeholder="3" type="number" />
+                </div>
+              </div>
+              <div className="container-input">
+                <div>Cost per click (CPC)</div>
+                <div className="custom-input">
+                <label>EUR</label><div className="line" /><input placeholder="0,35" type="number" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div className="container-buttons">
+        <button className="button-primary">Generate report</button>
+        <button className="button-secondary">Pause campaign</button>
+      </div>
     </main>
+    </>
   );
 }
 
