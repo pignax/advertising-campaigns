@@ -26,14 +26,13 @@ function App() {
     if(endDate){
       const difference= Math.abs(new Date(endDate) - new Date(startDate));
       setDays(difference/(1000 * 3600 * 24))
+    }else{
+      const difference= Math.abs(new Date(startDate) - new Date(startDate));
+      setDays(difference/(1000 * 3600 * 24))
+    }
       setClicks(Math.floor((Math.random() * 100)))
-      console.log("spentValue", spentValue)
       setSpent(spentValue * clicks)
       setPeople(clicks+"M")
-    }else{
-      alert("fill in end date");
-      setDays(0)
-    }
   }
 
   
@@ -84,7 +83,7 @@ function App() {
               </div>
               <div className="container-input">
                 <div>End date of the campaig</div>
-                <input type="date" onChange={event => setEndDate(event.target.value)} />
+                <input type="date" defaultValue={startDate} onChange={event => setEndDate(event.target.value || startDate)} />
               </div>
               <div className="container-input">
                 <div>Daily spending limit</div>
