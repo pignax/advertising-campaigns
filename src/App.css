@@ -41,6 +41,7 @@ main {
 .details,
 .form {
   margin-top: 40px;
+  height: 320px;
 }
 
 .details {
@@ -63,6 +64,15 @@ main {
 .result div {
   text-align: start;
   margin-left: 20px;
+}
+
+.text {
+  margin: 20px;
+  text-align: start;
+}
+
+.form {
+  width: 100%;
 }
 
 .form-content {

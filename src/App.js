@@ -3,6 +3,40 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [endDate, setEndDate] = useState()
+  const [days, setDays] = useState(0)
+  const [clicks, setClicks] = useState(0)
+  const [spentValue, setSpentValue] = useState(1)
+  const [spent, setSpent] = useState(0)
+  const [people, setPeople] = useState("0")
+
+  const pauseReport = () =>{
+    setDays(0)
+    setClicks(0)
+    setSpent(0)
+    setPeople("0")
+  }
+
+  const curr = new Date();
+  curr.setDate(curr.getDate());
+  const startDate = curr.toISOString().substr(0,10);
+
+  const generateReport = () =>{
+    if(endDate){
+      const difference= Math.abs(new Date(endDate) - new Date(startDate));
+      setDays(difference/(1000 * 3600 * 24))
+      setClicks(Math.floor((Math.random() * 100)))
+      console.log("spentValue", spentValue)
+      setSpent(spentValue * clicks)
+      setPeople(clicks+"M")
+    }else{
+      alert("fill in end date");
+      setDays(0)
+    }
+  }
+
+  
   return (
     <>
     <main>
@@ -10,10 +44,10 @@ function App() {
         <div className="container-details">
           <div className="title">Campaign details</div>
           <div className="details">
-            <div className="result"><span>5</span><div>Days remaining</div></div>
-            <div className="result"><span>300</span><div>Clicks</div></div>
-            <div className="result"><span>240</span><div>Spent</div></div>
-            <div className="result"><span>5M</span><div>People reached</div></div>
+            <div className="result"><span>{days}</span><div>Days remaining</div></div>
+            <div className="result"><span>{clicks}</span><div>Clicks</div></div>
+            <div className="result"><span>{spent}</span><div>Spent</div></div>
+            <div className="result"><span>{people}</span><div>People reached</div></div>
           </div>
         </div>
 
@@ -42,14 +76,15 @@ function App() {
                 </div>
               </div>
             </div>
+            <div className="text">RUN DAILY 21 DAYS</div>
             <div className="form-content">
               <div className="container-input">
                 <div>Start date of the campaign</div>
-                <input type="date" />
+                <input type="date" defaultValue={startDate} />
               </div>
               <div className="container-input">
                 <div>End date of the campaig</div>
-                <input type="date" />
+                <input type="date" onChange={event => setEndDate(event.target.value)} />
               </div>
               <div className="container-input">
                 <div>Daily spending limit</div>
@@ -60,7 +95,7 @@ function App() {
               <div className="container-input">
                 <div>Cost per click (CPC)</div>
                 <div className="custom-input">
-                <label>EUR</label><div className="line" /><input placeholder="0,35" type="number" />
+                <label>EUR</label><div className="line" /><input placeholder="1" type="number" onChange={event => setSpentValue(event.target.value)}  />
                 </div>
               </div>
             </div>
@@ -69,8 +104,8 @@ function App() {
       </div>
       <hr />
       <div className="container-buttons">
-        <button className="button-primary">Generate report</button>
-        <button className="button-secondary">Pause campaign</button>
+        <button className="button-primary" onClick={() => generateReport()}>Generate report</button>
+        <button className="button-secondary" onClick={() => pauseReport()}>Pause campaign</button>
       </div>
     </main>
     </>
