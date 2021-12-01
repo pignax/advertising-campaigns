@@ -37,9 +37,8 @@ function App() {
 
   
   return (
-    <>
-    <main>
-      <div className="container">
+    <div className="container">
+      <div className="container-details-form">
         <div className="container-details">
           <div className="title">Campaign details</div>
           <div className="details">
@@ -88,13 +87,13 @@ function App() {
               <div className="container-input">
                 <div>Daily spending limit</div>
                 <div className="custom-input">
-                <label>EUR</label><input placeholder="3" type="number" />
+                <label>EUR</label><input placeholder="3" />
                 </div>
               </div>
               <div className="container-input">
                 <div>Cost per click (CPC)</div>
                 <div className="custom-input">
-                <label>EUR</label><div className="line" /><input placeholder="1" type="number" onChange={event => setSpentValue(event.target.value)}  />
+                <label>EUR</label><div className="line" /><input placeholder="1" onChange={event => setSpentValue(event.target.value)}  />
                 </div>
               </div>
             </div>
@@ -106,8 +105,7 @@ function App() {
         <button className="button-primary" onClick={() => generateReport()}>Generate report</button>
         <button className="button-secondary" onClick={() => pauseReport()}>Pause campaign</button>
       </div>
-    </main>
-    </>
+    </div>
   );
 }
 
